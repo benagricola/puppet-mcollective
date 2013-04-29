@@ -37,7 +37,7 @@ define mcollective::plugin (
   $base_source    = 'puppet:///modules/mcollective/plugins',
   $plugin_type    = 'agent',
   $install_client = false,
-  $ensure         = 'present',
+  $ensure         = true,
   $ddl            = true ,
   $application    = true ) {
 
@@ -45,10 +45,7 @@ define mcollective::plugin (
 
   $bool_install_client=any2bool($install_client)
 
-  $real_ensure = $ensure ? {
-    absent  => $ensure,
-    default => 'present',
-  }
+  $real_ensure = bool2ensure($ensure)
 
   $real_ddl = $ddl ? {
     true    => "${name}.ddl",

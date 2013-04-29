@@ -2,52 +2,57 @@ class mcollective::plugins {
 
   include mcollective
 
+  $ensure = $mcollective::manage_package ? {
+    default   => true,
+    'absent'  => false,
+  }
+
   # PuppetLabs Plugins
   mcollective::plugin { 'process':
-    ensure         => $mcollective::manage_package,
+    ensure         => $ensure,
     install_client => $mcollective::install_client,
     application    => 'pgrep.rb',
   }
 
   mcollective::plugin { 'iptables':
-    ensure         => $mcollective::manage_package,
+    ensure         => $ensure,
     install_client => $mcollective::install_client,
   }
 
   mcollective::plugin { 'filemgr':
-    ensure         => $mcollective::manage_package,
+    ensure         => $ensure,
     install_client => $mcollective::install_client,
   }
 
   mcollective::plugin { 'nettest':
-    ensure         => $mcollective::manage_package,
+    ensure         => $ensure,
     install_client => $mcollective::install_client,
   }
 
   mcollective::plugin { 'service':
-    ensure         => $mcollective::manage_package,
+    ensure         => $ensure,
     install_client => $mcollective::install_client,
   }
 
   mcollective::plugin { 'puppetd':
-    ensure         => $mcollective::manage_package,
+    ensure         => $ensure,
     install_client => $mcollective::install_client,
   }
 
   mcollective::plugin { 'puppetca':
-    ensure         => $mcollective::manage_package,
+    ensure         => $ensure,
     install_client => $mcollective::install_client,
     application    => false,
   }
 
   mcollective::plugin { 'puppetral':
-    ensure         => $mcollective::manage_package,
+    ensure         => $ensure,
     install_client => $mcollective::install_client,
     application    => false,
   }
 
   mcollective::plugin { 'package':
-    ensure         => $mcollective::manage_package,
+    ensure         => $ensure,
     install_client => $mcollective::install_client,
   }
 
